@@ -14,5 +14,4 @@ export const IMG = styled.img`
 
     margin-top: 25px;
 
-
 `;
