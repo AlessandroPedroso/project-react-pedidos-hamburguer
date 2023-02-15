@@ -1,5 +1,6 @@
 import {useRef} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { Container,IMG } from "./styles";
 
@@ -8,10 +9,12 @@ import H1 from "../../Components/Title";
 import ContainerItens from "../../Components/ContainerItens/index";
 import CampoTexto from "../../Components/CampoTexto";
 import Button from "../../Components/Button";
+
 const Home = ()=>{
 
     const inputPedido = useRef();
     const inputCliente = useRef();
+    const navigate = useNavigate();
 
     const addNovoPedido = async() =>{
 
@@ -28,6 +31,8 @@ const Home = ()=>{
                 order: pedido,
                 clientName: cliente
             })
+
+            navigate("/pedidos");
 
             // console.log(response);
         }
