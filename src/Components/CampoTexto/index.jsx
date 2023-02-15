@@ -1,15 +1,15 @@
-import React from "react";
+import React, {forwardRef} from "react";
 import { Label, CaixaInput, Input as InputCampo } from "./styles";
 
-const Input = ({label, placeholder}) => {
+const Input = forwardRef(({label, placeholder}, ref) => {
 
     return (
         <CaixaInput>
             <Label>{label}</Label>
-            <InputCampo type="text" placeholder={placeholder} />
+            <InputCampo ref={ref} type="text" placeholder={placeholder} />
         </CaixaInput>
     )
 
-}
+})
 
 export default Input
