@@ -10,6 +10,6 @@ line-height: 33px;
 text-align: center;
 color: #FFFFFF;
 margin-top: 25px;
-margin-bottom: 76px;
+margin-bottom: 50px;
 
 `
