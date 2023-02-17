@@ -48,7 +48,7 @@ const Pedidos = () =>{
                     {
                         pedidos.map(itens => (
 
-                            <ListPedidos>
+                            <ListPedidos key={itens.id}>
                             <DivPedidos>
                                 <PPedidos>{itens.order}</PPedidos>
                                 <PCliente>{itens.clientName}</PCliente>
