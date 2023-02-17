@@ -4,7 +4,7 @@ export const Button = styled.button`
 
     width: 342px;
     height: 68px;
-    background: #D93856;
+    background: ${props => props.backgroundBlack? 'rgba(255, 255, 255, 0.14)':'#D93856'};
     margin-top: 35px;
     margin-bottom: 51px;
     font-family: 'Roboto';

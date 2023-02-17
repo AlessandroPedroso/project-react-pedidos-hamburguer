@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { Container,ListPedidos,PPedidos,PCliente, DivPedidos} from "./styles";
 import burguer from '../../assets/burger2.png'
@@ -7,31 +9,59 @@ import ContainerItens from '../../Components/ContainerItens';
 import LixeiraDelete from '../../assets/lixeira.svg'
 import Button from '../../Components/Button'
 
+
 const Pedidos = () =>{
+
+    const [pedidos,setPedidos] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+
+        async function newPedidos(){
+            const {data:newPedidos} = await axios.get('http://localhost:3000/order');
+            setPedidos(newPedidos);
+        }
+
+        newPedidos();
+
+    },[])
+
+    const backToPage = () =>{
+
+        navigate('/');
+    }
+
+    async function deletePedidos(id){
+
+        await axios.delete(`http://localhost:3000/order/${id}`);
+
+        const newPedidos = pedidos.filter(itens=> itens.id !== id);
+        setPedidos(newPedidos);
+    }
+
     return (
         <Container>
             <img src={burguer}/>
             <Title>Pedidos</Title>
             <ContainerItens>
                 <ul>
-                    <ListPedidos>
-                        <DivPedidos>
-                            <PPedidos>1 Batata Grande, 1 X-Bacon,2 Coca-Colas Light</PPedidos>
-                            <PCliente>Steve Jobs</PCliente>
-                        </DivPedidos>
+                    {
+                        pedidos.map(itens => (
 
-                        <button><img src={LixeiraDelete} /></button>
-                    </ListPedidos>
-                    <ListPedidos>
-                        <DivPedidos>
-                            <PPedidos>1 Batata Grande, 1 X-Bacon,2 Coca-Colas Light</PPedidos>
-                            <PCliente>Steve Jobs</PCliente>
-                        </DivPedidos>
-                        
-                        <button><img src={LixeiraDelete} /></button>
-                    </ListPedidos>
+                            <ListPedidos>
+                            <DivPedidos>
+                                <PPedidos>{itens.order}</PPedidos>
+                                <PCliente>{itens.clientName}</PCliente>
+                            </DivPedidos>
+    
+                            <button onClick={()=>deletePedidos(itens.id)}><img src={LixeiraDelete} /></button>
+                        </ListPedidos>
+
+                        ))
+                    }
+
                 </ul>
-                <Button>Voltar</Button>
+                <Button backgroundBlack={true} onClick={backToPage}>Voltar</Button>
             </ContainerItens>
         </Container>
     )

@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const ListPedidos = styled.li`
 width: 100%;
-max-width: 342px;
+min-width: 342px;
 height: auto;
 background: rgba(255, 255, 255, 0.25);
 border-radius: 14px;
